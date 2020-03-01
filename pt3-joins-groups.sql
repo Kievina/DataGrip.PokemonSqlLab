@@ -42,5 +42,18 @@ on pkm.secondary_type = t.id
 where t.name = "Poison";
 
 /* What are all the primary types and how many pokemon have that type? */
+select t.name as primary_name, count(pkm.primary_type) as n_primary
+from pokemon.pokemons pkm
+join pokemon.types t
+on pkm.primary_type = t.id
+group by pkm.primary_type;
+
 /* How many pokemon at level 100 does each trainer with at least one level 100 pokemon have? (Hint: your query should not display a trainer) */
+
+
+
 /* How many pokemon only belong to one trainer and no other? */
+# select train.pokemon_id, count(train.trainerID)
+# from pokemon.pokemon_trainer train
+# group by train.pokemon_id
+# having count(trainerID) = 1;
