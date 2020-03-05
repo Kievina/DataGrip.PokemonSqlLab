@@ -8,12 +8,12 @@ on pkm.primary_type = t.id;
 /* What is Rufflet's secondary type? */
 select pkm.name, pkm.secondary_type
 from pokemon.pokemons pkm
-where pkm.name = "Rufflet";
+where pkm.name = 'Rufflet';
 
 select pkm.name as pokemon_name, t.name as secondary_type
 from pokemon.pokemons pkm join pokemon.types t
 on pkm.secondary_type = t.id
-where pkm.name = "Rufflet";
+where pkm.name = 'Rufflet';
 
 /* What are the names of the pokemon that belong to the trainer with trainerID 303? */
 select train.trainerID, pkm.name as pokemon_name
@@ -33,13 +33,13 @@ select pkm.secondary_type
 from pokemon.pokemons pkm
 left join pokemon.types t
 on pkm.secondary_type = t.id
-where t.name = "Poison";
+where t.name = 'Poison';
 
 select count(t.name)
 from pokemon.pokemons pkm
 left join pokemon.types t
 on pkm.secondary_type = t.id
-where t.name = "Poison";
+where t.name = 'Poison';
 
 /* What are all the primary types and how many pokemon have that type? */
 select t.name as primary_name, count(pkm.primary_type) as n_primary
@@ -49,7 +49,11 @@ on pkm.primary_type = t.id
 group by pkm.primary_type;
 
 /* How many pokemon at level 100 does each trainer with at least one level 100 pokemon have? (Hint: your query should not display a trainer) */
-
+select pkm_train.trainerID, count(pkm_train.pokelevel)
+from pokemon.pokemon_trainer as pkm_train
+where pkm_train.pokelevel = 100
+group by pkm_train.trainerID;
+# having count(pkm_train.pokelevel) > 1;
 
 
 /* How many pokemon only belong to one trainer and no other? */
